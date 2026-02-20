@@ -10,10 +10,9 @@
 An intelligent, real-time virtual coach that uses computer vision and machine learning to analyze exercise form, provide instant feedback, and track workout progress. Perfect for home workouts, rehabilitation, and fitness training.
 ## 🎥 Demo
 
-Check out the Virtual Sports Coach in action!
+Watch the Virtual Sports Coach in action:
 
-<video src="docs/demo/virtual-coach-demo.mp4" width="100%" controls></video>
-
+[![Virtual Sports Coach Demo](https://img.youtube.com/vi/fgQ3sqatliQ/0.jpg)](https://www.youtube.com/watch?v=fgQ3sqatliQ)
 ## ✨ Features
 
 - **Real-time pose detection** using MediaPipe and YOLOv8
