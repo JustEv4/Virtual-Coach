@@ -1,169 +1,525 @@
-# Coach Sportif Virtuel Embarqué
+# 🏋️ Virtual Sports Coach
 
-**Analyse de mouvement et correction posturale en temps réel par Pose Estimation et Intelligence Artificielle**
+[![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://www.python.org/downloads/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.109+-green.svg)](https://fastapi.tiangolo.com/)
+[![React](https://img.shields.io/badge/React-18+-61dafb.svg)](https://reactjs.org/)
+[![ngrok](https://img.shields.io/badge/ngrok-ready-blueviolet)](https://ngrok.com/)
+[![Git LFS](https://img.shields.io/badge/Git%20LFS-enabled-orange)](https://git-lfs.github.com/)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-Projet de fin d'études – Master 1 Intelligence Artificielle  
-Université Cadi Ayyad – Faculté des Sciences Semlalia, Marrakech  
-Module : Systèmes Embarqués et IA  
-Année universitaire 2025 – 2026
+An intelligent, real-time virtual coach that uses computer vision and machine learning to analyze exercise form, provide instant feedback, and track workout progress. Perfect for home workouts, rehabilitation, and fitness training.
 
----
+## ✨ Features
 
-### Réalisé par
-- MEKKANI Wijdane  
-- BAKRAOUI Salma  
-- LAMRHNBAR Haytam  
-- BATTAHI Zakariaa
-- MOUSSAIF Abdelkabir
+- **Real-time pose detection** using MediaPipe and YOLOv8
+- **Exercise form analysis** with custom ML models (LSTM, ONNX)
+- **Instant audio feedback** via pyttsx3
+- **Public URL access** via ngrok (share your workout session remotely)
+- **Hardware integration** for Raspberry Pi (LEDs, buzzer)
+- **Progress tracking** with SQLite database
+- **Cross-platform** (Windows, Raspberry Pi, Linux)
+- **Modern web interface** built with React/Next.js
+- **WebSocket support** for real-time communication
 
-### Encadré par
-Pr. AMEKSA Mohammed
+## 📋 Table of Contents
 
----
+- [Prerequisites](#prerequisites)
+- [Quick Start](#quick-start)
+- [ML Models](#-ml-models)
+- [🌐 Public Access with ngrok](#-public-access-with-ngrok)
+- [Project Structure](#-project-structure)
+- [Configuration](#-configuration)
+- [Usage](#-usage)
+- [Hardware Setup](#-hardware-setup-for-raspberry-pi)
+- [API Documentation](#-api-documentation)
+- [Contributing](#-contributing)
+- [License](#-license)
 
-## Présentation du projet
+## 🚀 Prerequisites
 
-Le **Coach Sportif Virtuel Embarqué** est un système intelligent qui analyse en temps réel la posture et les mouvements de l'utilisateur lors d'exercices physiques, fournit des corrections instantanées et suit les performances, le tout en s'exécutant sur du matériel embarqué (notamment Raspberry Pi) ou en mode hybride.
+### System Requirements
+- **Python**: 3.11 or higher
+- **Node.js**: 18.x or higher
+- **RAM**: 8GB minimum (16GB recommended for model training)
+- **Disk Space**: 2GB for models and dependencies
+- **Camera**: Webcam or USB camera (for pose detection)
 
-Le système combine :
-- **Vision par ordinateur** (MediaPipe + YOLOv11-Pose)
-- **Apprentissage profond** (LSTM pour la classification des exercices et de la qualité)
-- **Interface utilisateur moderne** (React/Next.js)
-- **Contrôle matériel** (Rpi 5, LEDs, buzzer)
+### Software Requirements
+- **Git** with **Git LFS** (Large File Storage)
+- **pip** (Python package manager)
+- **npm** or **yarn** (Node.js package manager)
+- **ngrok** (for public access) - [Download here](https://ngrok.com/download)
 
----
+## ⚡ Quick Start
 
-## Architecture du projet
+### 1. Clone the Repository with Models
 
-Architecture **Client-Server** moderne avec séparation claire :
+First, install Git LFS from [git-lfs.github.com](https://git-lfs.github.com/), then:
 
-### Composants principaux
-- **Backend** : Serveur FastAPI (Python)  
-  → Capture caméra (OpenCV)  
-  → Détection de pose (MediaPipe)  
-  → Analyse de mouvement (LSTM + ONNX)  
-  → Flux vidéo MJPEG + WebSockets pour feedback en temps réel
-
-- **Frontend** : Application React/Next.js  
-  → Affichage du flux vidéo avec squelette  
-  → Feedback visuel, vocal et textuel  
-  → Tableau de bord des performances
-
-- **Matériel embarqué** (optionnel) : Raspberry Pi + webcam + servo + LEDs + buzzer
-
-### Flux de données en temps réel
-1. Capture d'images via caméra  
-2. Extraction de 33 points clés avec MediaPipe  
-3. Analyse de séquences par modèle LSTM → détection exercice + qualité posture  
-4. Envoi des résultats via WebSockets (répétitions, erreurs, score confiance)  
-5. Diffusion simultanée du flux vidéo annoté (/video_feed)  
-6. Feedback multimodal : voix (Web Speech API), LEDs, buzzer, messages à l'écran
-
----
-
-## Fonctionnalités principales
-
-1. **Analyse posturale en temps réel**  
-   Suivi précis des mouvements grâce à MediaPipe et YOLOv11-Pose (même sur Raspberry Pi)
-
-2. **Classification intelligente des exercices**  
-   Modèle LSTM identifie l'exercice (squat, pompe, etc.) et évalue la qualité
-
-3. **Retour utilisateur multimodal**  
-   - Voix (ex. : « Gardez le dos droit ! »)  
-   - Signaux lumineux (LEDs) et sonores (buzzer)  
-   - Messages visuels sur l’interface
-
-4. **Suivi des performances**  
-   - Comptage automatique des répétitions et séries  
-   - Historique des sessions (SQLite)  
-   - Statistiques et progression (tableau de bord)
-
-5. **Centrage automatique de la caméra**  
-   Utilisation d’un servo-moteur pour recentrer l’utilisateur
-
-6. **Mode Hybride**  
-   Backend sur Raspberry Pi + Frontend sur PC / hébergé Vercel
-
----
-
-## Prérequis techniques
-
-### Logiciels
-- Python 3.9+  
-- Node.js 18+  
-- Bibliothèques clés :
-  - `mediapipe`, `opencv-python`, `fastapi`, `uvicorn`
-  - `tensorflow` / `keras` (LSTM)
-  - `ultralytics` (YOLO)
-  - `onnxruntime` (modèles ONNX)
-
-### Matériel recommandé
-- Webcam 720p ou mieux  
-- Raspberry Pi 5 (ou PC moderne)  
-- 4 Go de RAM minimum  
-- (optionnel Si Rpi 5) Servo-moteur, LEDs RGB, buzzer piezo
-
----
-
-## Installation & Lancement
-
-### Backend
 ```bash
+# Clone the repository
+git clone https://github.com/JustEv4/Virtual-Coach.git
+cd Virtual-Coach
+
+# Download the ML models (stored with Git LFS)
+git lfs pull
+```
+
+### 2. Backend Setup (Python/FastAPI)
+
+```bash
+# Navigate to backend directory
 cd backend
+
+# Create virtual environment
 python -m venv venv
-# Windows : venv\Scripts\activate
-# Linux/Mac : source venv/bin/activate
+
+# Activate virtual environment
+# On Windows:
+venv\Scripts\activate
+# On Mac/Linux:
+source venv/bin/activate
+
+# Install dependencies
 pip install -r requirements.txt
-uvicorn main:app --host 0.0.0.0 --port 8000
+
+# Start the backend server
+python main.py
+# or
+uvicorn main:app --reload --host 0.0.0.0 --port 8000
 ```
-### Frontend (local)
+
+### 3. Frontend Setup (React/Next.js)
+
 ```bash
+# Open a new terminal
 cd frontend
+
+# Install dependencies
 npm install
+# or
+yarn install
+
+# Start the development server
 npm run dev
+# or
+yarn dev
 ```
-→ Ouvrir http://localhost:3000
 
-### Frontend déployé (Vercel)
-Le frontend est déployé ici :
-https://coach-sportif-frontend.vercel.app
-(Le backend doit être accessible via ngrok ou un tunnel)
+The application will be available at:
+- **Frontend**: http://localhost:3000
+- **Backend API**: http://localhost:8000
+- **API Documentation**: http://localhost:8000/docs
 
-### Utilisation de ngrok (pour exposer le backend)
-```Bash
+## 🌐 Public Access with ngrok
+
+Share your virtual coach with anyone, anywhere using ngrok tunnels.
+
+### Why ngrok?
+- **Share your workout session** with remote coaches or friends
+- **Test on mobile devices** without local network setup
+- **Demo your project** to clients or stakeholders
+- **Access from anywhere** without port forwarding
+
+### Setting up ngrok
+
+#### 1. **Install ngrok**
+- **Windows**: Download from [ngrok.com/download](https://ngrok.com/download)
+- **Mac**: `brew install ngrok`
+- **Linux**: `sudo snap install ngrok`
+
+#### 2. **Create an ngrok account** (free)
+- Sign up at [ngrok.com](https://ngrok.com)
+- Get your auth token from the dashboard
+
+#### 3. **Authenticate ngrok**
+```bash
+ngrok config add-authtoken YOUR_AUTH_TOKEN
+```
+
+### 🚀 Creating Public Tunnels
+
+#### **Option A: Tunnel both frontend and backend (Recommended)**
+
+Open two separate terminals:
+
+**Terminal 1 - Backend tunnel:**
+```bash
+# Tunnel the FastAPI backend (port 8000)
 ngrok http 8000
 ```
-Copier l’URL https générée, puis la configurer dans Vercel :
-
-NEXT_PUBLIC_API_URL = https://votre-url.ngrok-free.app
-NEXT_PUBLIC_WS_URL  = wss://votre-url.ngrok-free.app/ws
-
-
-Structure des dossiers (après nettoyage)
-```text
-├── backend/
-│   ├── main.py               # Point d'entrée FastAPI
-│   ├── models/               # Modèles IA (.h5, .onnx, .pt, .task)
-│   ├── requirements.txt
-│   └── ...
-├── frontend/                 # Application Next.js
-│   ├── components/
-│   ├── pages/
-│   └── ...
-├── docs/                     # Documentation détaillée
-└── README.md
+**Output:**
 ```
-### Documentation complète
-Consultez les guides détaillés dans /docs :
+Forwarding https://abc123.ngrok.io -> http://localhost:8000
+```
 
-Déploiement Hybride Vercel + Raspberry Pi
-Configuration matérielle (LEDs, Buzzer, Servo)
-Installation sur Raspberry Pi
-Architecture détaillée du système
+**Terminal 2 - Frontend tunnel:**
+```bash
+# Tunnel the Next.js frontend (port 3000)
+ngrok http 3000
+```
+**Output:**
+```
+Forwarding https://xyz789.ngrok.io -> http://localhost:3000
+```
 
+#### **Option B: Single tunnel for backend only (for API access)**
+```bash
+ngrok http 8000
+```
 
-Développé dans le cadre du Master Intelligence Artificielle – Université Cadi Ayyad
-Objectif : offrir une solution de coaching sportif accessible, intelligente et embarquée
-Année universitaire 2025 – 2026
-Marrakech, Maroc
+#### **Option C: Use the included batch script (Windows)**
+```bash
+# Simply run:
+run_backend_public.bat
+```
+This script automatically:
+- Starts the backend server
+- Launches ngrok tunnel
+- Displays the public URL
+- Opens your default browser
+
+### 📱 Accessing Your Public App
+
+Once tunnels are running:
+
+| Service | Local URL | Public URL (example) |
+|---------|-----------|----------------------|
+| Frontend | http://localhost:3000 | https://xyz789.ngrok.io |
+| Backend API | http://localhost:8000 | https://abc123.ngrok.io |
+| API Docs | http://localhost:8000/docs | https://abc123.ngrok.io/docs |
+| WebSocket | ws://localhost:8000/ws | wss://abc123.ngrok.io/ws |
+
+### ⚙️ Configure Frontend to Use Public Backend
+
+Update your frontend `.env.local` file:
+
+```env
+# For local development
+NEXT_PUBLIC_API_URL=http://localhost:8000
+NEXT_PUBLIC_WEBSOCKET_URL=ws://localhost:8000/ws
+
+# For public access (replace with your ngrok URL)
+NEXT_PUBLIC_API_URL=https://abc123.ngrok.io
+NEXT_PUBLIC_WEBSOCKET_URL=wss://abc123.ngrok.io/ws
+```
+
+### 🔒 Security Notes
+
+- **Free ngrok** URLs are temporary and change each restart
+- **Paid plans** offer:
+  - Custom subdomains (e.g., `mycoach.ngrok.io`)
+  - Reserved domains
+  - Basic authentication
+  - IP restrictions
+
+Add basic auth to your tunnel:
+```bash
+ngrok http 8000 --basic-auth="username:password"
+```
+
+### 🎯 Use Cases for ngrok
+
+| Scenario | How to Use |
+|----------|------------|
+| Remote coaching | Share frontend URL with your coach |
+| Mobile testing | Access from phone/tablet on cellular data |
+| Client demo | Send temporary URL for review |
+| Team collaboration | Share backend API for integration |
+| IoT/Raspberry Pi | Access Pi from anywhere without static IP |
+
+## 🧠 ML Models
+
+This project uses several machine learning models stored with **Git LFS**. After cloning, ensure you've run `git lfs pull` to download them.
+
+### Model Files
+
+| File | Size | Purpose |
+|------|------|---------|
+| `fitness_model.onnx` | 330 MB | Main exercise classification |
+| `correctionExercices (1).onnx` | 85 MB | Exercise correction model |
+| `correctionExercices (1).pt` | 85 MB | PyTorch version of correction model |
+| `model_lstm_tache2.h5` | 45 MB | LSTM model for temporal analysis |
+| `model_lstm_tache2.tflite` | 15 MB | TensorFlow Lite optimized version |
+| `model_lstm_tache2_optimized.tflite` | 8 MB | Further optimized for edge devices |
+| `pose_landmarker_full.task` | 30 MB | MediaPipe pose landmarks |
+| `yolov8n-pose.pt` | 6 MB | YOLOv8 pose detection |
+| `classif_model_.pkl` | 2 MB | Scikit-learn classifier |
+| `scaler_tache2.pkl` | 1 MB | Feature scaler |
+
+### Important Notes for Contributors
+
+If you're contributing to this project:
+
+```bash
+# Install Git LFS first
+git lfs install
+
+# Clone the repo
+git clone https://github.com/JustEv4/Virtual-Coach.git
+cd Virtual-Coach
+
+# Pull the LFS files
+git lfs pull
+
+# When adding new model files
+git lfs track "*.onnx"
+git lfs track "*.pt"
+git lfs track "*.h5"
+git lfs track "*.tflite"
+git add .gitattributes
+git add your-model-file
+git commit -m "Add new model"
+git push
+```
+
+## 📁 Project Structure
+
+```
+Virtual-Coach/
+├── backend/                    # Python FastAPI backend
+│   ├── main.py                 # Main application entry point
+│   ├── requirements.txt        # Python dependencies
+│   ├── venv/                   # Virtual environment (not in repo)
+│   ├── models/                 # ML models (Git LFS)
+│   │   ├── fitness_model.onnx
+│   │   ├── correctionExercices (1).onnx
+│   │   ├── model_lstm_tache2.h5
+│   │   └── ...
+│   ├── pose_detector.py        # Pose detection module
+│   ├── exercise_engine.py      # Exercise analysis logic
+│   ├── feedback.py             # Audio feedback system
+│   ├── hardware_manager.py     # Hardware abstraction layer
+│   ├── hardware_pi.py          # Raspberry Pi specific code
+│   ├── hardware_sim.py         # Hardware simulation for dev
+│   ├── database.py             # SQLite database operations
+│   ├── calibration.py          # Camera calibration
+│   ├── scripts/                 # Utility scripts
+│   │   ├── install_deps.bat
+│   │   ├── install_deps.sh
+│   │   ├── run_backend.bat
+│   │   ├── setup_pi.sh
+│   │   └── test_hardware.sh
+│   └── tests/                   # Unit tests
+│       ├── test_models.py
+│       ├── test_ORT.py
+│       └── test_tflite.py
+│
+├── frontend/                   # React/Next.js frontend
+│   ├── src/                    # Source code
+│   ├── public/                  # Static assets
+│   ├── package.json
+│   ├── package-lock.json
+│   └── node_modules/            # Not in repo
+│
+├── docs/                        # Documentation
+│   ├── Architecture.md
+│   ├── Architecture_RaspberryPi.md
+│   ├── DEPLOYMENT_VERCEL_PI.md
+│   ├── HARDWARE_CONFIG.md
+│   ├── Setup_RaspberryPi.md
+│   └── deployment_guide.md
+│
+├── .gitignore                   # Git ignore rules
+├── .gitattributes               # Git LFS configuration
+├── run_backend_public.bat       # Windows startup script with ngrok
+├── setup_and_run_pi.sh          # Raspberry Pi setup script
+└── sport_coach.bat              # Main launcher for Windows
+```
+
+## ⚙️ Configuration
+
+### Environment Variables
+
+Create a `.env` file in the backend directory:
+
+```env
+# Backend Configuration
+HOST=0.0.0.0
+PORT=8000
+DEBUG=True
+DATABASE_URL=sqlite:///coach.db
+
+# Camera Settings
+CAMERA_ID=0
+FRAME_WIDTH=640
+FRAME_HEIGHT=480
+FPS=30
+
+# Hardware (Raspberry Pi)
+ENABLE_HARDWARE=False
+LED_PIN=18
+BUZZER_PIN=23
+
+# Model Settings
+MODEL_PATH=./models/fitness_model.onnx
+CONFIDENCE_THRESHOLD=0.7
+```
+
+### Frontend Configuration
+
+Create a `.env.local` file in the frontend directory:
+
+```env
+# For local development
+NEXT_PUBLIC_API_URL=http://localhost:8000
+NEXT_PUBLIC_WEBSOCKET_URL=ws://localhost:8000/ws
+
+# For public access (replace with your ngrok URL)
+# NEXT_PUBLIC_API_URL=https://abc123.ngrok.io
+# NEXT_PUBLIC_WEBSOCKET_URL=wss://abc123.ngrok.io/ws
+```
+
+## 🎮 Usage
+
+### Basic Workflow
+
+1. **Start the backend server**
+2. **(Optional) Start ngrok tunnel** for public access
+3. **Open the frontend application** in your browser
+4. **Allow camera access** when prompted
+5. **Select an exercise** from the list
+6. **Follow the on-screen instructions** and perform the exercise
+7. **Receive real-time feedback** via audio and visual cues
+8. **Track your progress** in the dashboard
+
+### Available Exercises
+
+- Squats
+- Push-ups
+- Lunges
+- Planks
+- Jumping jacks
+- And more...
+
+### Voice Commands (if enabled)
+
+- "Start workout"
+- "Next exercise"
+- "Repeat instructions"
+- "Stop workout"
+
+## 🎛️ Hardware Setup (for Raspberry Pi)
+
+### Required Components
+- Raspberry Pi 4 or 5
+- Camera module or USB webcam
+- LEDs (optional, for visual feedback)
+- Buzzer (optional, for audio feedback)
+- Speaker (optional, for voice feedback)
+
+### Installation on Raspberry Pi
+
+```bash
+# Clone the repository
+git clone https://github.com/JustEv4/Virtual-Coach.git
+cd Virtual-Coach
+
+# Download models
+git lfs pull
+
+# Run the setup script
+chmod +x setup_and_run_pi.sh
+./setup_and_run_pi.sh
+```
+
+### Pin Configuration (if using GPIO)
+
+| Component | GPIO Pin |
+|-----------|----------|
+| LED (Red) | 18 |
+| LED (Green) | 19 |
+| LED (Blue) | 20 |
+| Buzzer | 23 |
+
+### Access Your Pi Remotely with ngrok
+
+```bash
+# On your Raspberry Pi, expose the backend
+ngrok http 8000
+
+# Share the generated URL with anyone!
+```
+
+## 📚 API Documentation
+
+Once the backend is running, access the interactive API documentation at:
+- **Swagger UI**: http://localhost:8000/docs
+- **ReDoc**: http://localhost:8000/redoc
+- **Via ngrok**: https://your-ngrok-url/docs
+
+### Main Endpoints
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/` | GET | API status |
+| `/ws` | WebSocket | Real-time video stream |
+| `/exercises` | GET | List available exercises |
+| `/analyze` | POST | Analyze a single frame |
+| `/start_workout` | POST | Start a workout session |
+| `/stop_workout` | POST | Stop current session |
+| `/history` | GET | Get workout history |
+
+## 🤝 Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. **Fork the repository**
+2. **Create a feature branch**:
+   ```bash
+   git checkout -b feature/amazing-feature
+   ```
+3. **Commit your changes**:
+   ```bash
+   git commit -m 'Add amazing feature'
+   ```
+4. **Push to the branch**:
+   ```bash
+   git push origin feature/amazing-feature
+   ```
+5. **Open a Pull Request**
+
+### Development Guidelines
+
+- Follow PEP 8 for Python code
+- Use ESLint/Prettier for JavaScript/React
+- Add tests for new features
+- Update documentation as needed
+- Keep model files under 100MB (use Git LFS for larger files)
+
+### Adding New Models
+
+```bash
+# Track new model types if needed
+git lfs track "*.newmodel"
+
+# Add your model
+git add path/to/your-model.newmodel
+git commit -m "Add new model for feature X"
+git push
+```
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- [MediaPipe](https://mediapipe.dev/) for pose detection
+- [YOLOv8](https://github.com/ultralytics/ultralytics) for object detection
+- [FastAPI](https://fastapi.tiangolo.com/) for the backend framework
+- [React](https://reactjs.org/) for the frontend library
+- [TailwindCSS](https://tailwindcss.com/) for styling
+- [Git LFS](https://git-lfs.github.com/) for large file storage
+- [ngrok](https://ngrok.com/) for secure tunnels to localhost
+
+## 📧 Contact
+
+- **Project Link**: [https://github.com/JustEv4/Virtual-Coach](https://github.com/JustEv4/Virtual-Coach)
+- **Issues**: [Report a bug](https://github.com/JustEv4/Virtual-Coach/issues)
+- **Discussions**: [Join the conversation](https://github.com/JustEv4/Virtual-Coach/discussions)
+
+---
+
+**Happy Training!** 🏋️‍♂️ 
+**Share your progress anywhere with ngrok!** 🌐
