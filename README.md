@@ -1,110 +1,118 @@
-# Virtual Sports Coach - Complete Documentation
+# Coach Sportif Virtuel Embarqué
 
-Welcome to the **Virtual Sports Coach** project. This document explains in detail how the system works, its architecture, its features, and the necessary prerequisites.
+**Analyse de mouvement et correction posturale en temps réel par Pose Estimation et Intelligence Artificielle**
 
----
-
-## Project Architecture
-
-The project follows a modern **Client-Server** architecture with a clear separation between data processing (Backend) and the user interface (Frontend).
-
-### 1. Global Structure
-- **Backend**: FastAPI server (Python) that handles camera capture, processes real-time data streams, and exposes an MJPEG video stream.
-- **Frontend**: React/Next.js application that displays the interface, receives the video stream from the backend, and shows user feedback.
-- **ML Models**: Artificial Intelligence engines for pose detection and exercise classification.
-
-### 2. Data Flow (Real-time)
-1. The **Backend** captures images directly from the camera (via OpenCV).
-2. The **Backend** processes each image with **MediaPipe** to extract 33 key points.
-3. The **LSTM** and **ONNX** models analyze these points to validate posture.
-4. The **Backend** sends results (repetitions, errors, confidence) via **WebSockets**.
-5. Simultaneously, the **Backend** broadcasts the processed video stream (with skeleton) via an HTTP endpoint (`/video_feed`).
-6. The **Frontend** receives the video stream and displays dynamic feedback.
+Projet de fin d'études – Master 1 Intelligence Artificielle  
+Université Cadi Ayyad – Faculté des Sciences Semlalia, Marrakech  
+Module : Systèmes Embarqués et IA  
+Année universitaire 2025 – 2026
 
 ---
 
-## Core Features
+### Réalisé par
+- MEKKANI Wijdane  
+- BAKRAOUI Salma  
+- LAMRHNBAR Haytam  
+- BATTAHI Zakariaa
+- MOUSSAIF Abdelkabir
 
-### 1. Real-Time Pose Analysis
-Using **MediaPipe** and **YOLOv11-Pose** to track body movements with millimeter precision, even on low-power machines (like the Raspberry Pi).
-
-### 2. Intelligent Classification (LSTM)
-A recurrent neural network model (LSTM) analyzes movement sequences to precisely identify the exercise being performed (Squat, Pushup) and its quality.
-
-### 3. Comfort Features
-- **Camera Auto-Centering**: Uses a servo motor to automatically orient the camera and keep the user in the center of the frame.
-- **Voice Feedback**: Uses the **Web Speech API** to provide tips (e.g., "Keep your back straight!") without the user needing to look at the screen.
-
-### 4. Performance Tracking
-- **Repetition Counter**: Automatic detection of up and down phases.
-- **History**: Session saving in a **SQLite** database.
-- **Statistics**: Progress visualization via a dashboard.
-
-### 5. Hybrid Mode (Pi + PC)
-Ability to run the backend on a Raspberry Pi and the frontend on a PC, or everything on the same machine.
+### Encadré par
+Pr. AMEKSA Mohammed
 
 ---
 
-## Technical Requirements
+## Présentation du projet
 
-### Software
-- **Python 3.9+**: For the calculation engine and AI.
-- **Node.js 18+**: For the user interface.
-- **Key Libraries**:
-  - `mediapipe`: Skeleton detection.
-  - `fastapi`: High-performance web server.
-  - `ultralytics` (YOLO): Alternative for pose.
-  - `tensorflow/keras`: For the LSTM model.
+Le **Coach Sportif Virtuel Embarqué** est un système intelligent qui analyse en temps réel la posture et les mouvements de l'utilisateur lors d'exercices physiques, fournit des corrections instantanées et suit les performances, le tout en s'exécutant sur du matériel embarqué (notamment Raspberry Pi) ou en mode hybride.
 
-### Hardware
-- **Webcam**: 720p recommended for better detection.
-- **Processor**: Modern CPU (Intel i5/Ryzen 5) or Raspberry Pi 4/5.
-- **Memory**: Minimum 4 GB of RAM.
+Le système combine :
+- **Vision par ordinateur** (MediaPipe + YOLOv11-Pose)
+- **Apprentissage profond** (LSTM pour la classification des exercices et de la qualité)
+- **Interface utilisateur moderne** (React/Next.js)
+- **Contrôle matériel** (Rpi 5, LEDs, buzzer)
 
 ---
 
-## Installation & Usage
+## Architecture du projet
 
-### 1. Backend Preparation
+Architecture **Client-Server** moderne avec séparation claire :
+
+### Composants principaux
+- **Backend** : Serveur FastAPI (Python)  
+  → Capture caméra (OpenCV)  
+  → Détection de pose (MediaPipe)  
+  → Analyse de mouvement (LSTM + ONNX)  
+  → Flux vidéo MJPEG + WebSockets pour feedback en temps réel
+
+- **Frontend** : Application React/Next.js  
+  → Affichage du flux vidéo avec squelette  
+  → Feedback visuel, vocal et textuel  
+  → Tableau de bord des performances
+
+- **Matériel embarqué** (optionnel) : Raspberry Pi + webcam + servo + LEDs + buzzer
+
+### Flux de données en temps réel
+1. Capture d'images via caméra  
+2. Extraction de 33 points clés avec MediaPipe  
+3. Analyse de séquences par modèle LSTM → détection exercice + qualité posture  
+4. Envoi des résultats via WebSockets (répétitions, erreurs, score confiance)  
+5. Diffusion simultanée du flux vidéo annoté (/video_feed)  
+6. Feedback multimodal : voix (Web Speech API), LEDs, buzzer, messages à l'écran
+
+---
+
+## Fonctionnalités principales
+
+1. **Analyse posturale en temps réel**  
+   Suivi précis des mouvements grâce à MediaPipe et YOLOv11-Pose (même sur Raspberry Pi)
+
+2. **Classification intelligente des exercices**  
+   Modèle LSTM identifie l'exercice (squat, pompe, etc.) et évalue la qualité
+
+3. **Retour utilisateur multimodal**  
+   - Voix (ex. : « Gardez le dos droit ! »)  
+   - Signaux lumineux (LEDs) et sonores (buzzer)  
+   - Messages visuels sur l’interface
+
+4. **Suivi des performances**  
+   - Comptage automatique des répétitions et séries  
+   - Historique des sessions (SQLite)  
+   - Statistiques et progression (tableau de bord)
+
+5. **Centrage automatique de la caméra**  
+   Utilisation d’un servo-moteur pour recentrer l’utilisateur
+
+6. **Mode Hybride**  
+   Backend sur Raspberry Pi + Frontend sur PC / hébergé Vercel
+
+---
+
+## Prérequis techniques
+
+### Logiciels
+- Python 3.9+  
+- Node.js 18+  
+- Bibliothèques clés :
+  - `mediapipe`, `opencv-python`, `fastapi`, `uvicorn`
+  - `tensorflow` / `keras` (LSTM)
+  - `ultralytics` (YOLO)
+  - `onnxruntime` (modèles ONNX)
+
+### Matériel recommandé
+- Webcam 720p ou mieux  
+- Raspberry Pi 5 (ou PC moderne)  
+- 4 Go de RAM minimum  
+- (optionnel Si Rpi 5) Servo-moteur, LEDs RGB, buzzer piezo
+
+---
+
+## Installation & Lancement
+
+### Backend
 ```bash
 cd backend
 python -m venv venv
-# Activate the venv (Windows: venv\Scripts\activate)
+# Windows : venv\Scripts\activate
+# Linux/Mac : source venv/bin/activate
 pip install -r requirements.txt
-python main.py
-```
-
-### 2. Frontend Preparation
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-Access `http://localhost:3000` to start your training.
-
----
-
-## Folder Structure (After Cleanup)
-- `/backend/tests`: Model validation tests.
-- `/backend/models`: AI models (.h5, .onnx, .pt, .task).
-- `/backend/scripts`: Installation and launch scripts.
-- `/frontend/components`: UI components (React).
-- `/docs`: Detailed guides and architecture.
-
----
-
-### 📄 Complete Documentation
-For more details, see the specific guides:
-- [Hybrid Deployment Guide (Vercel + Pi)](docs/DEPLOYMENT_VERCEL_PI.md)
-- [Hardware Configuration (LEDs, Buzzer, Servo)](docs/HARDWARE_CONFIG.md)
-- [Raspberry Pi Installation Guide](docs/Setup_RaspberryPi.md)
-- [System Architecture](docs/Architecture.md)
-
----
-
-*Developed to provide an intelligent and accessible sports coaching experience.*
- 
----
-**Author:** Moussaif Abdelkabir
-**Date:** Feb 15, 2026"# Virtual-Coach" 
+uvicorn main:app --host 0.0.0.0 --port 8000
