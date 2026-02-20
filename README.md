@@ -8,6 +8,11 @@
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 An intelligent, real-time virtual coach that uses computer vision and machine learning to analyze exercise form, provide instant feedback, and track workout progress. Perfect for home workouts, rehabilitation, and fitness training.
+## 🎥 Demo
+
+Check out the Virtual Sports Coach in action!
+
+<video src="docs/demo/virtual-coach-demo.mp4" width="100%" controls></video>
 
 ## ✨ Features
 
