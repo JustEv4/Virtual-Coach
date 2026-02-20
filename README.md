@@ -116,3 +116,54 @@ python -m venv venv
 # Linux/Mac : source venv/bin/activate
 pip install -r requirements.txt
 uvicorn main:app --host 0.0.0.0 --port 8000
+```
+### Frontend (local)
+```bash
+cd frontend
+npm install
+npm run dev
+```
+→ Ouvrir http://localhost:3000
+
+### Frontend déployé (Vercel)
+Le frontend est déployé ici :
+https://coach-sportif-frontend.vercel.app
+(Le backend doit être accessible via ngrok ou un tunnel)
+
+### Utilisation de ngrok (pour exposer le backend)
+```Bash
+ngrok http 8000
+```
+Copier l’URL https générée, puis la configurer dans Vercel :
+
+NEXT_PUBLIC_API_URL = https://votre-url.ngrok-free.app
+NEXT_PUBLIC_WS_URL  = wss://votre-url.ngrok-free.app/ws
+
+
+Structure des dossiers (après nettoyage)
+```text
+├── backend/
+│   ├── main.py               # Point d'entrée FastAPI
+│   ├── models/               # Modèles IA (.h5, .onnx, .pt, .task)
+│   ├── requirements.txt
+│   └── ...
+├── frontend/                 # Application Next.js
+│   ├── components/
+│   ├── pages/
+│   └── ...
+├── docs/                     # Documentation détaillée
+└── README.md
+```
+### Documentation complète
+Consultez les guides détaillés dans /docs :
+
+Déploiement Hybride Vercel + Raspberry Pi
+Configuration matérielle (LEDs, Buzzer, Servo)
+Installation sur Raspberry Pi
+Architecture détaillée du système
+
+
+Développé dans le cadre du Master Intelligence Artificielle – Université Cadi Ayyad
+Objectif : offrir une solution de coaching sportif accessible, intelligente et embarquée
+Année universitaire 2025 – 2026
+Marrakech, Maroc
