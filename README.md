@@ -438,6 +438,8 @@ Satisfaction: ██████████ 4.6/5
 
 <br>
 
+📖 **For Full results**: [docs/Rapport_Virtual_Coach_sporif.pdf](docs/Rapport_Virtual_Coach_sporif.pdf)  ✅ HERE
+
 ## 🤝 **Contributing**
 
 We welcome contributions! Please follow these steps:
