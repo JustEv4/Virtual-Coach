@@ -1,4 +1,4 @@
-# 🏋️ Virtual Sports Coach
+<h1 id = #-virtual-sports-coach>Virtual Sports Coach</h1>
 
 <p align="center">
   <img src="docs/images/hero-banner.png" alt="Virtual Sports Coach Banner" width="800"/>
@@ -518,7 +518,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 </p>
 
 <p align="center">
-  <a href="#-virtual-sports-coach">⬆️ Back to Top</a>
+  <a href="#-virtual-sports-coach"> Back to Top</a>
 </p>
 
 ---
