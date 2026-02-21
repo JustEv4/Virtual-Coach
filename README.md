@@ -1,7 +1,7 @@
-<h1 id = "-virtual-sports-coach">Virtual Sports Coach</h1>
+# Virtual Sports Coach
 
 <p align="center">
-  <img src="docs/images/hero-banner.png" alt="Virtual Sports Coach Banner" width="800"/>
+  <img src="virtual_coach_banner_v2.png" alt="Virtual Sports Coach Banner" width="800"/>
 </p>
 
 <p align="center">
@@ -20,17 +20,17 @@
 </p>
 
 <p align="center">
-  <a href="#-demo">Demo</a> •
-  <a href="#-features">Features</a> •
-  <a href="#-quick-start">Quick Start</a> •
-  <a href="#-project-structure">Structure</a> •
-  <a href="#-models">Models</a> •
-  <a href="#-documentation">Docs</a>
+  <a href="#demo">Demo</a> •
+  <a href="#features">Features</a> •
+  <a href="#quick-start">Quick Start</a> •
+  <a href="#project-structure">Structure</a> •
+  <a href="#trained-models">Models</a> •
+  <a href="#documentation">Docs</a>
 </p>
 
 <br>
 
-## 🎓 **Academic Excellence Project**
+## 🎓 Academic Excellence Project
 
 <div align="center">
   <table>
@@ -56,7 +56,7 @@
 
 <br>
 
-## 🎥 **Demo**
+## 🎥 Demo
 
 <p align="center">
   <a href="https://www.youtube.com/watch?v=fgQ3sqatliQ">
@@ -68,7 +68,7 @@
 
 <br>
 
-## ✨ **Features**
+## ✨ Features
 
 <div align="center">
   <table>
@@ -119,7 +119,7 @@
 
 <br>
 
-## 🚀 **Quick Start**
+## 🚀 Quick Start
 
 ### Prerequisites
 
@@ -193,7 +193,7 @@ yarn dev
 
 <br>
 
-## 🧠 **Trained Models**
+## 🧠 Trained Models
 
 Our system uses a sophisticated ensemble of models trained specifically for exercise analysis. All models are stored with **Git LFS** and automatically downloaded with `git lfs pull`.
 
@@ -234,7 +234,7 @@ Our system uses a sophisticated ensemble of models trained specifically for exer
 
 <br>
 
-## 🌐 **Public Access with ngrok**
+## 🌐 Public Access with ngrok
 
 Share your virtual coach with anyone, anywhere.
 
@@ -276,7 +276,7 @@ Then add to your Vercel environment variables:
 
 <br>
 
-## 🎛️ **Hardware Setup (Raspberry Pi 5)**
+## 🎛️ Hardware Setup (Raspberry Pi 5)
 
 ### Components Required
 
@@ -305,7 +305,7 @@ Then add to your Vercel environment variables:
 
 <br>
 
-## 📁 **Project Structure**
+## 📁 Project Structure
 
 ```
 Virtual-Coach/
@@ -327,215 +327,39 @@ Virtual-Coach/
 │   ├── 📄 Architecture.md      # System architecture
 │   ├── 📄 HARDWARE_CONFIG.md   # Wiring diagrams
 │   ├── 📄 Setup_RaspberryPi.md # Pi installation
-│   ├── 📄 DEPLOYMENT_VERCEL_PI.md # Hybrid deployment
-│   └── 📄 Rapport_Virtual_Coach_sporif.pdf # 56-page academic report
+│   ├── 📄 DEPLOYMENT_VERCEL_PI.md # Vercel + Pi deployment guide
+│   └── 📁 images/              # Images for documentation
 │
-├── 📁 scripts/                  # Utility scripts
-│   ├── 📄 setup_and_run_pi.sh   # Raspberry Pi setup
-│   └── 📄 run_backend_public.bat # Windows + ngrok
-│
-├── 📄 .gitattributes            # Git LFS configuration
-├── 📄 .gitignore                 # Ignored files
-└── 📄 README.md                  # You are here
+├── 📄 .gitattributes           # Git LFS configuration
+├── 📄 .gitignore               # Files to ignore in Git
+├── 📄 README.md                # Project README
+├── 📄 LICENSE                  # MIT License
+├── 📄 run_backend_public.bat   # Windows script for ngrok backend
+├── 📄 setup_and_run_pi.sh      # Script for Raspberry Pi setup
+└── 📄 sport_coach.bat          # Windows script to run the coach
 ```
 
 <br>
 
-## ⚙️ **Configuration**
+## 🤝 Contributing
 
-### Backend (.env)
-
-```env
-# Server
-HOST=0.0.0.0
-PORT=8000
-DEBUG=True
-
-# Database
-DATABASE_URL=sqlite:///coach.db
-
-# Camera
-CAMERA_ID=0
-FRAME_WIDTH=640
-FRAME_HEIGHT=480
-FPS=30
-
-# Hardware (Raspberry Pi)
-ENABLE_HARDWARE=False
-LED_PIN_RED=17
-LED_PIN_GREEN=27
-LED_PIN_BLUE=22
-BUZZER_PIN=23
-SERVO_PIN=18
-
-# Models
-MODEL_PATH=./models/fitness_model.onnx
-CONFIDENCE_THRESHOLD=0.7
-```
-
-### Frontend (.env.local)
-
-```env
-# Local development
-NEXT_PUBLIC_API_URL=http://localhost:8000
-NEXT_PUBLIC_WS_URL=ws://localhost:8000/ws
-
-# Remote access (ngrok)
-# NEXT_PUBLIC_API_URL=https://your-ngrok-url.ngrok-free.app
-# NEXT_PUBLIC_WS_URL=wss://your-ngrok-url.ngrok-free.app/ws
-```
+We welcome contributions to the Virtual Sports Coach project! Please see our [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to get started.
 
 <br>
 
-## 📚 **API Documentation**
-
-Once running, explore the interactive API docs:
-
-- **Swagger UI**: http://localhost:8000/docs
-- **ReDoc**: http://localhost:8000/redoc
-
-### Main Endpoints
-
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/` | GET | API status |
-| `/ws` | WebSocket | Real-time video stream |
-| `/exercises` | GET | List available exercises |
-| `/analyze` | POST | Analyze single frame |
-| `/start_workout` | POST | Start session |
-| `/stop_workout` | POST | Stop session |
-| `/history` | GET | Workout history |
-| `/calibrate` | POST | T-pose calibration |
-
-<br>
-
-## 📊 **Results & Performance**
-
-Our system was rigorously tested with 10 participants of varying morphologies:
-
-### Key Metrics
-
-```
-Accuracy:     ██████████ 98%
-FPS:          ██████████ 21 fps
-Latency:      ██████████ 85 ms
-Satisfaction: ██████████ 4.6/5
-```
-
-### Confusion Matrix LSTM
-
-<p align="center">
-  <img src="docs/images/75569f44-7242-4028-88fb-d57dc1ccd532.jpg" alt="Confusion Matrix" width="500"/>
-</p>
-
-### Error Reduction
-
-- **Jitter reduction**: 78% (EMA/OneEuro filter)
-- **False positives reduced**: 65% (T-pose calibration)
-- **Classes with perfect accuracy**: 6 out of 8
-
-📖 **Full results**: [docs/Rapport_Virtual_Coach_sporif.pdf](docs/Rapport_Virtual_Coach_sporif.pdf)
-
-<br>
-
-## 🤝 **Contributing**
-
-We welcome contributions! Please follow these steps:
-
-1. **Fork the repository**
-2. **Create a feature branch**:
-   ```bash
-   git checkout -b feature/amazing-feature
-   ```
-3. **Commit your changes**:
-   ```bash
-   git commit -m 'Add amazing feature'
-   ```
-4. **Push to the branch**:
-   ```bash
-   git push origin feature/amazing-feature
-   ```
-5. **Open a Pull Request**
-
-### Development Guidelines
-
-- Follow PEP 8 for Python code
-- Use ESLint/Prettier for JavaScript/React
-- Add tests for new features
-- Update documentation
-- Keep models under 100MB or use Git LFS
-
-### Adding New Models
-
-```bash
-# Track new model types
-git lfs track "*.onnx" "*.pt" "*.h5" "*.tflite"
-
-# Add your model
-git add models/your-new-model.onnx
-git commit -m "Add new model for feature X"
-git push
-```
-
-<br>
-
-## 📄 **License**
+## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 <br>
 
-## 🙏 **Acknowledgments**
+## 📧 Contact
 
-- **MediaPipe** – Pose detection framework
-- **Ultralytics YOLOv8/v11** – Object detection
-- **FastAPI** – High-performance backend
-- **React/Next.js** – Frontend framework
-- **Tailwind CSS** – Styling
-- **shadcn/ui** – UI components
-- **Git LFS** – Large file storage
-- **ngrok** – Secure tunnels
-- **Raspberry Pi Foundation** – Amazing hardware
+For any inquiries, please reach out to the project maintainers.
 
 <br>
 
-## 📞 **Contact**
-
-- **Project Repository**: [github.com/JustEv4/Virtual-Coach](https://github.com/JustEv4/Virtual-Coach)
-- **Issues**: [Report a bug](https://github.com/JustEv4/Virtual-Coach/issues)
-- **Discussions**: [Join the conversation](https://github.com/JustEv4/Virtual-Coach/discussions)
-
 ---
 
-<p align="center">
-  <strong>Projet réalisé dans le cadre du Master Intelligence Artificielle</strong><br>
-  Université Cadi Ayyad – Faculté des Sciences Semlalia Marrakech<br>
-  Année universitaire 2025 – 2026
-</p>
-
-<p align="center">
-  <img src="docs/images/semlalia.png" alt="FSSM Logo" width="80"/>
-</p>
-
-<h2>Academic Reference</h2>
-<p>
-  This project was developed as a Capstone Project for the <strong>Master in AI</strong> at the 
-  Faculty of Sciences Semlalia (UCA), Marrakech.
-</p>
-
-<p align="center">
-  <strong>Authors</strong>: MEKKANI W., BAKRAOUI S., LAMRHNBAR H., BATTAHI Z. & Moussaif, A.<br>
-  <strong>Supervisor</strong>: Pr. AMEKSA Mohammed<br>
-  <strong>Year</strong>: 2025-2026
-</p>
-
-
-<p align="center">
-  <a href="#-virtual-sports-coach"> Back to Top</a>
-</p>
-
----
-
-<p align="center">
-  <strong>🏋️ Train smarter, not harder – with AI by your side 🤖</strong>
-</p>
+**Author:** Manus AI
+**Date:** February 21, 2026
