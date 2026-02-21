@@ -36,7 +36,7 @@
   <table>
     <tr>
       <td align="center">
-        <img src="docs/images/uca-logo.png" alt="Université Cadi Ayyad" width="120"/>
+        <img src="docs/images/UCA-Logo.png" alt="Université Cadi Ayyad" width="120"/>
       </td>
       <td>
         <strong>Master 1 Intelligence Artificielle</strong><br>
@@ -422,10 +422,10 @@ Latency:      ██████████ 85 ms
 Satisfaction: ██████████ 4.6/5
 ```
 
-### Confusion Matrix
+### Confusion Matrix LSTM
 
 <p align="center">
-  <img src="docs/images/confusion-matrix.png" alt="Confusion Matrix" width="500"/>
+  <img src="docs/images/75569f44-7242-4028-88fb-d57dc1ccd532.jpg" alt="Confusion Matrix" width="500"/>
 </p>
 
 ### Error Reduction
@@ -514,7 +514,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 </p>
 
 <p align="center">
-  <img src="docs/images/fssm-logo.png" alt="FSSM Logo" width="80"/>
+  <img src="docs/images/image_2026-02-21_131417890.png" alt="FSSM Logo" width="80"/>
 </p>
 
 <p align="center">
