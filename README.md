@@ -1,4 +1,4 @@
-<h1 id = #-virtual-sports-coach>Virtual Sports Coach</h1>
+<h1 id = "-virtual-sports-coach">Virtual Sports Coach</h1>
 
 <p align="center">
   <img src="docs/images/hero-banner.png" alt="Virtual Sports Coach Banner" width="800"/>
