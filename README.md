@@ -514,7 +514,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 </p>
 
 <p align="center">
-  <img src="docs/images/image_2026-02-21_131417890.png" alt="FSSM Logo" width="80"/>
+  <img src="docs/images/semlalia.png" alt="FSSM Logo" width="80"/>
 </p>
 
 <p align="center">
