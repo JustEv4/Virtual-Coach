@@ -74,43 +74,43 @@
   <table>
     <tr>
       <td align="center" width="250">
-        <h3>🎯 Real-time Pose Detection</h3>
+        <h3> Real-time Pose Detection</h3>
         <p>MediaPipe Tasks + YOLOv11-pose with 33 keypoints at 21+ FPS on Raspberry Pi 5</p>
       </td>
       <td align="center" width="250">
-        <h3>🧠 Intelligent Analysis</h3>
+        <h3> Intelligent Analysis</h3>
         <p>LSTM + ONNX models for exercise classification and posture correction</p>
       </td>
       <td align="center" width="250">
-        <h3>🔊 Multimodal Feedback</h3>
+        <h3> Multimodal Feedback</h3>
         <p>Voice synthesis (TTS), RGB LEDs, and buzzer for instant corrections</p>
       </td>
     </tr>
     <tr>
       <td align="center">
-        <h3>🔄 Auto-centering Camera</h3>
+        <h3> Auto-centering Camera</h3>
         <p>Servo motor keeps you centered in frame during workouts</p>
       </td>
       <td align="center">
-        <h3>📊 Progress Tracking</h3>
+        <h3> Progress Tracking</h3>
         <p>SQLite database stores session history and performance metrics</p>
       </td>
       <td align="center">
-        <h3>🌐 Hybrid Deployment</h3>
+        <h3> Hybrid Deployment</h3>
         <p>Frontend on Vercel + Backend on Pi with ngrok tunnel for remote access</p>
       </td>
     </tr>
     <tr>
       <td align="center">
-        <h3>📱 Modern UI</h3>
+        <h3> Modern UI</h3>
         <p>Next.js + Tailwind CSS with responsive design and glassmorphism</p>
       </td>
       <td align="center">
-        <h3>🛡️ Privacy-first</h3>
+        <h3> Privacy-first</h3>
         <p>100% local processing – no cloud, no data leaks</p>
       </td>
       <td align="center">
-        <h3>💰 Affordable</h3>
+        <h3> Affordable</h3>
         <p>Complete system under 150€ vs 2000€ commercial alternatives</p>
       </td>
     </tr>
@@ -310,33 +310,33 @@ Then add to your Vercel environment variables:
 ```
 Virtual-Coach/
 ├── 📁 backend/                 # FastAPI server + AI + hardware control
-│   ├── 📄 main.py              # Entry point
-│   ├── 📄 pose_detector.py     # MediaPipe/YOLO integration
-│   ├── 📄 exercise_engine.py   # Core logic
-│   ├── 📄 feedback.py          # Voice synthesis
-│   ├── 📄 hardware_manager.py  # GPIO abstraction
+│   ├──  main.py              # Entry point
+│   ├──  pose_detector.py     # MediaPipe/YOLO integration
+│   ├──  exercise_engine.py   # Core logic
+│   ├──  feedback.py          # Voice synthesis
+│   ├──  hardware_manager.py  # GPIO abstraction
 │   ├── 📁 models/              # Trained models (Git LFS)
 │   └── 📁 tests/               # Unit tests
 │
 ├── 📁 frontend/                # Next.js + React interface
 │   ├── 📁 src/                 # Source code
 │   ├── 📁 public/              # Static assets
-│   └── 📄 package.json         # Dependencies
+│   └──  package.json         # Dependencies
 │
 ├── 📁 docs/                    # Comprehensive documentation
-│   ├── 📄 Architecture.md      # System architecture
-│   ├── 📄 HARDWARE_CONFIG.md   # Wiring diagrams
-│   ├── 📄 Setup_RaspberryPi.md # Pi installation
-│   ├── 📄 DEPLOYMENT_VERCEL_PI.md # Hybrid deployment
-│   └── 📄 Rapport_Virtual_Coach_sporif.pdf # 56-page academic report
+│   ├──  Architecture.md      # System architecture
+│   ├──  HARDWARE_CONFIG.md   # Wiring diagrams
+│   ├──  Setup_RaspberryPi.md # Pi installation
+│   ├──  DEPLOYMENT_VERCEL_PI.md # Hybrid deployment
+│   └──  Rapport_Virtual_Coach_sporif.pdf # 56-page academic report
 │
 ├── 📁 scripts/                  # Utility scripts
-│   ├── 📄 setup_and_run_pi.sh   # Raspberry Pi setup
-│   └── 📄 run_backend_public.bat # Windows + ngrok
+│   ├──  setup_and_run_pi.sh   # Raspberry Pi setup
+│   └──  run_backend_public.bat # Windows + ngrok
 │
-├── 📄 .gitattributes            # Git LFS configuration
-├── 📄 .gitignore                 # Ignored files
-└── 📄 README.md                  # You are here
+├──  .gitattributes            # Git LFS configuration
+├──  .gitignore                 # Ignored files
+└──  README.md                  # You are here
 ```
 
 <br>
