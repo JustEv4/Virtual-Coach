@@ -516,13 +516,19 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 <p align="center">
   <img src="docs/images/semlalia.png" alt="FSSM Logo" width="80"/>
 </p>
-## 🎓 Academic Reference
-This project was developed as a Capstone Project for the **Master in AI** at the 
-Faculty of Sciences Semlalia (UCA), Marrakech.
 
-**Authors:** MEKKANI W., BAKRAOUI S., LAMRHNBAR H., BATTAHI Z.
-**Supervisor:** Pr. AMEKSA Mohammed
-**Year:** 2025-2026
+<h2>Academic Reference</h2>
+<p>
+  This project was developed as a Capstone Project for the <strong>Master in AI</strong> at the 
+  Faculty of Sciences Semlalia (UCA), Marrakech.
+</p>
+
+<p align="center">
+  <strong>Authors</strong>: MEKKANI W., BAKRAOUI S., LAMRHNBAR H., BATTAHI Z. & Moussaif, A.<br>
+  <strong>Supervisor</strong>: Pr. AMEKSA Mohammed<br>
+  <strong>Year</strong>: 2025-2026
+</p>
+
 
 <p align="center">
   <a href="#-virtual-sports-coach"> Back to Top</a>
