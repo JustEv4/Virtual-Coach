@@ -524,8 +524,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 </p>
 
 <p align="center">
-  <strong>Authors</strong>: MEKKANI W., BAKRAOUI S., LAMRHNBAR H., BATTAHI Z. & Moussaif, A.<br>
-  <strong>Supervisor</strong>: Pr. AMEKSA Mohammed<br>
   <strong>Year</strong>: 2025-2026
 </p>
 
