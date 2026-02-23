@@ -59,8 +59,8 @@
 ## 🎥 **Demo**
 
 <p align="center">
-  <a href="https://www.youtube.com/watch?v=fgQ3sqatliQ">
-    <img src="https://img.youtube.com/vi/fgQ3sqatliQ/0.jpg" alt="Virtual Sports Coach Demo" width="600" style="border-radius: 10px; box-shadow: 0 10px 25px rgba(0,0,0,0.2);"/>
+  <a href="https://www.youtube.com/watch?v=v5Zx79bINiY">
+    <img src="https://img.youtube.com/vi/v5Zx79bINiY/0.jpg" alt="Virtual Sports Coach Demo" width="600" style="border-radius: 10px; box-shadow: 0 10px 25px rgba(0,0,0,0.2);"/>
   </a>
   <br>
   <em>Click the image to watch the full demo video (1:45 min)</em>
